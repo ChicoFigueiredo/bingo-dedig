@@ -3,15 +3,16 @@ var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var User = require('../models/User');
 
 passport.use(new GoogleStrategy({
-    clientID: "591307876438-4nmmm817vks785u467lo22kss40kqno2.apps.googleusercontent.com",
-    clientSecret: "BagENe4LxG_PZ_qz2oFX7Aok",
-    callbackURL: "http://127.0.0.1:3000/auth/google/callback"
-  },
-  function(accessToken, refreshToken, profile, done) {
-       User.findOrCreate({ userid: profile.id }, { name: profile.displayName,userid: profile.id }, function (err, user) {
-         return done(err, user);
-       });
-  }
+        clientID: "954700325718-rr3jab9sb3hf6hnpe38uak881rmgimg6.apps.googleusercontent.com",
+        clientSecret: "R7BZl36s9vZLEG_Mai8aHS3e",
+        callbackURL: "http://localhost:3000/auth/google/callback",
+        passReqToCallback: true
+    },
+    function(request, accessToken, refreshToken, profile, done) {
+        User.findOrCreate({ eMail: profile.emails[0].value }, { eMail: profile.emails[0].value, name: profile.displayName, useridGoogle: profile.id }, function(err, user) {
+            return done(err, user);
+        });
+    }
 ));
 
 module.exports = passport;
