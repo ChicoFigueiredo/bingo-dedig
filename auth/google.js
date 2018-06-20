@@ -9,7 +9,17 @@ passport.use(new GoogleStrategy({
         passReqToCallback: true
     },
     function(request, accessToken, refreshToken, profile, done) {
-        User.findOrCreate({ eMail: profile.emails[0].value }, { eMail: profile.emails[0].value, name: profile.displayName, useridGoogle: profile.id }, function(err, user) {
+        let eMail = '';
+        if (profile.emails) {
+            if (profile.emails[0].value) {
+                eMail = profile.emails[0].value;
+            } else {
+                eMail = profile.id;
+            }
+        } else {
+            eMail = profile.id;
+        }
+        User.findOrCreate({ eMail: eMail }, { eMail: eMail, name: profile.displayName, useridGoogle: profile.id }, function(err, user) {
             return done(err, user);
         });
     }
