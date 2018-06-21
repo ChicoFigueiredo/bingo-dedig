@@ -1,16 +1,28 @@
 import { Injectable } from '@angular/core';
+import { Http } from "@angular/http";
 import { Subject } from 'rxjs/Subject';
 
 import * as io from 'socket.io-client';
+import { cartelas } from '../models/cards';
+import { HttpClient } from '@angular/common/http';
+import { catchError, map, tap } from 'rxjs/operators';
+
+const URL_CARDS_BINGO = 'http://localhost:3000/cards'
 
 @Injectable()
 export class BroadcastBingoService {
-
+  cartelasUsuario:cartelas;
   socket: SocketIOClient.Socket;
   _msgSubject: Subject<string> = new Subject<string>();
   listenMsg() { return this._msgSubject.asObservable(); }
 
-  constructor() {
+  constructor(
+    private http: HttpClient
+  ) {
+    this.connectSocket();
+   }
+
+   connectSocket(){
     this.socket = io.connect('http://localhost:8000');
     this.socket.on('connect', () => {
       this.socket.on('msg', (msg) => {
@@ -25,6 +37,13 @@ export class BroadcastBingoService {
 
     });
    }
+
+   getCartelaUsuario(){
+     return this.http
+        .get(URL_CARDS_BINGO)
+        .map()
+   }
+
 
    enviarBola(bola) {
     this.socket.emit('bola-sorteada', bola);

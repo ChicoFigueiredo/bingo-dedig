@@ -11,6 +11,8 @@ var session = require('express-session');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var auth = require('./routes/auth');
+var cards = require('./routes/cards');
+
 var socket = require('socket.io');
 
 var app = express();
@@ -50,7 +52,7 @@ app.use(passport.session());
 app.use('/', index);
 app.use('/users', users);
 app.use('/auth', auth);
-
+app.use('/cards', cards);
 
 var server = require('http').Server(app);
 let io = socket(server);
