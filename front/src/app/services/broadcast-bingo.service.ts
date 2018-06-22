@@ -40,8 +40,12 @@ export class BroadcastBingoService {
 
    getCartelaUsuario(){
      return this.http
-        .get(URL_CARDS_BINGO)
-        .map()
+        .get(URL_CARDS_BINGO).pipe(
+          map((cards:cartelas) => {
+            this.cartelasUsuario = cards;
+            return cards;
+          })
+        )
    }
 
 

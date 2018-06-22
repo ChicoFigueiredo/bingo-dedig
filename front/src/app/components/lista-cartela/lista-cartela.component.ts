@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BroadcastBingoService } from './../../services/broadcast-bingo.service';
+import { cartelas } from '../../models/cards';
 // import * as arrayBingo from './generate.array.bingo';
 
 @Component({
@@ -9,6 +10,7 @@ import { BroadcastBingoService } from './../../services/broadcast-bingo.service'
 })
 export class ListaCartelaComponent implements OnInit {
 
+  cartelas:cartelas = []
 
   constructor(
     private bingo: BroadcastBingoService
@@ -20,6 +22,9 @@ export class ListaCartelaComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.bingo.getCartelaUsuario().subscribe((cartelas) => {
+      this.cartelas = cartelas;
+    })
   }
 
 }
