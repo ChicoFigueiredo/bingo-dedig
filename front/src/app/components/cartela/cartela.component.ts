@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { cartela } from '../../models/cards';
 
 @Component({
   selector: 'bg-cartela',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cartela.component.scss']
 })
 export class CartelaComponent implements OnInit {
-
+  @Input() public cartela: cartela = null;
   constructor() { }
 
   ngOnInit() {

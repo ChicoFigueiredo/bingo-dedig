@@ -7,8 +7,14 @@ module.exports = {
         }
         let deflator = 0;
         for (let i = 0; i < 25; i++) {
-            if (i === 13) {
-                cardBingo[i] = -1; // Espaço FREE
+            if (i === 12) {
+                cardBingo[i] = {
+                    numero: "",
+                    marcadoSistema: false,
+                    marcadoUsuario: false,
+                    linha: Math.floor(i / 5),
+                    coluna: i % 5 + 1
+                }; // Espaço FREE
                 deflator++;
             } else {
                 const numero = setSquare(i - deflator);

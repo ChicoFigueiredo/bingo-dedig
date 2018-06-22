@@ -1,2 +1,8 @@
-
-
+<div>
+    <div class="row">
+        <div *ngFor="let c of cartelas" class="col-lg-4 col-md-6 col-sm-12">
+            <bg-cartela [cartela]="c" class="col-md-12">
+            </bg-cartela>
+        </div>
+    </div>
+</div>

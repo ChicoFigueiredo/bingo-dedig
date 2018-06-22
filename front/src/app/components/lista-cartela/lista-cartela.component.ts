@@ -10,7 +10,7 @@ import { cartelas } from '../../models/cards';
 })
 export class ListaCartelaComponent implements OnInit {
 
-  cartelas:cartelas = []
+  cartelas: cartelas = [];
 
   constructor(
     private bingo: BroadcastBingoService
@@ -22,9 +22,9 @@ export class ListaCartelaComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.bingo.getCartelaUsuario().subscribe((cartelas) => {
-      this.cartelas = cartelas;
-    })
+    this.bingo.getCartelaUsuario().subscribe((c) => {
+      this.cartelas = c;
+    });
   }
 
 }
